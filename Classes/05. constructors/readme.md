@@ -1,53 +1,71 @@
 It's rare in the real world to see a class that defines properties like this (as we did):
 
-```python
-class Soldier:
-    name = "Legolas"
-    armor = 2
-    num_weapons = 2
+```csharp
+public class Soldier
+{
+    public string Name { get; set; } = "Legolas";
+    public int Armor { get; set; } = 2;
+    public int NumWeapons { get; set; } = 2;
+}
 ```
 
-A [constructor](<https://en.wikipedia.org/wiki/Constructor_(object-oriented_programming)>) is (usually) better. It's a specific method on a class called [`__init__`](https://docs.python.org/3/reference/datamodel.html#object.__init__) that is called automatically when you create a new instance of a class.
+A [constructor](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/constructors) is (usually) better. It's a special method with the same name as the class that is called automatically when you create a new instance of a class with `new`.
 
 So, using a constructor, the code from above would look like this:
 
-```python
-class Soldier:
-    def __init__(self):
-        self.name = "Legolas"
-        self.armor = 2
-        self.num_weapons = 2
+```csharp
+public class Soldier
+{
+    public string Name { get; set; }
+    public int Armor { get; set; }
+    public int NumWeapons { get; set; }
+
+    public Soldier()
+    {
+        Name = "Legolas";
+        Armor = 2;
+        NumWeapons = 2;
+    }
+}
 ```
 
-Not only is this *safer* (we'll talk about why later), but it also allows us to make the starting property values configurable:
+Not only is this *safer* (we'll talk about why later), but it also allows us to make the starting property values configurable:
 
-```python
-class Soldier:
-    def __init__(self, name, armor, num_weapons):
-        self.name = name
-        self.armor = armor
-        self.num_weapons = num_weapons
+```csharp
+public class Soldier
+{
+    public string Name { get; set; }
+    public int Armor { get; set; }
+    public int NumWeapons { get; set; }
 
-soldier_one = Soldier("Legolas", 2, 10)
-print(soldier_one.name)
-# prints "Legolas"
-print(soldier_one.armor)
-# prints "2"
-print(soldier_one.num_weapons)
-# prints "10"
+    public Soldier(string name, int armor, int numWeapons)
+    {
+        Name = name;
+        Armor = armor;
+        NumWeapons = numWeapons;
+    }
+}
 
-soldier_two = Soldier("Gimli", 5, 1)
-print(soldier_two.name)
-# prints "Gimli"
-print(soldier_two.armor)
-# prints "5"
-print(soldier_two.num_weapons)
-# prints "1"
+var soldierOne = new Soldier("Legolas", 2, 10);
+Console.WriteLine(soldierOne.Name);
+// prints "Legolas"
+Console.WriteLine(soldierOne.Armor);
+// prints "2"
+Console.WriteLine(soldierOne.NumWeapons);
+// prints "10"
+
+var soldierTwo = new Soldier("Gimli", 5, 1);
+Console.WriteLine(soldierTwo.Name);
+// prints "Gimli"
+Console.WriteLine(soldierTwo.Armor);
+// prints "5"
+Console.WriteLine(soldierTwo.NumWeapons);
+// prints "1"
 ```
 
 ## Assignment
 
-**Add a constructor to the `Wall` class**.
+**Add a constructor to the `Wall` class**.
 
-1. [ ] It should take `depth`, `height` and `width` as parameters, in that order, and set them as instance properties.
-2. [ ] Compute an additional property called `volume`. Volume is the depth times height times width
+1. [ ] It should take `depth`, `height` and `width` as parameters, in that order, and set them as instance properties.
+2. [ ] Compute an additional property called `Volume`. Volume is the depth times height times width

@@ -4,60 +4,69 @@ We've already worked with both class variables and instance variables, but we ha
 
 ## Instance Variables
 
-Instance variables vary from object to object and are **declared in the constructor.** They're more common:
+Instance variables vary from object to object and are **declared without the `static` keyword**, usually set in the constructor. They're more common:
 
-```python
-class Wall:
-    def __init__(self):
-        self.height = 10
+```csharp
+public class Wall
+{
+    public int Height { get; set; }
 
-south_wall = Wall()
-south_wall.height = 20 # only updates this instance of a wall
-print(south_wall.height)
-# prints "20"
+    public Wall()
+    {
+        Height = 10;
+    }
+}
 
-north_wall = Wall()
-print(north_wall.height)
-# prints "10"
+var southWall = new Wall();
+southWall.Height = 20; // only updates this instance of a wall
+Console.WriteLine(southWall.Height);
+// prints "20"
+
+var northWall = new Wall();
+Console.WriteLine(northWall.Height);
+// prints "10"
 ```
 
 ## Class Variables
 
-Class variables are shared between instances of the same class and are **declared at the top level of a class definition**. They're less common:
+Class variables are shared between instances of the same class and are **declared with the [`static`](https://learn.microsoft.com/dotnet/csharp/language-reference/keywords/static) keyword**. They're less common:
 
-```python
-class Wall:
-    height = 10
+```csharp
+public class Wall
+{
+    public static int Height { get; set; } = 10;
+}
 
-south_wall = Wall()
-print(south_wall.height)
-# prints "10"
+Console.WriteLine(Wall.Height);
+// prints "10"
 
-Wall.height = 20 # updates all instances of a Wall
+Wall.Height = 20; // updates it for every Wall
 
-print(south_wall.height)
-# prints "20"
+Console.WriteLine(Wall.Height);
+// prints "20"
 ```
 
-In other languages these types of variables are often called [static variables](https://en.wikipedia.org/wiki/Static_variable).
+In C# (and many other languages) these are called [static members](https://learn.microsoft.com/dotnet/csharp/programming-guide/classes-and-structs/static-classes-and-static-class-members).
 
 ## Which Should I Use?
 
-Generally speaking, *stay away from class variables*. Just like global variables, class variables are usually a bad idea because they make it hard to keep track of which parts of your program are making updates. However, it is important to understand how they work because you may see them in the wild.
+Generally speaking, *stay away from class variables*. Just like global variables, class variables are usually a bad idea because they make it hard to keep track of which parts of your program are making updates. However, it is important to understand how they work because you may see them in the wild.
 
 ## Assignment
 
-Some lazy class variable code written by another dev team at Age of Dragons Studios is causing bugs in our team's `Dragon` class.
+Some lazy class variable code written by another dev team at Age of Dragons Studios is causing bugs in our team's `Dragon` class.
 
-In the `main()` function (that our team isn't responsible for) the line:
+In the `Run()` method (that our team isn't responsible for) the line:
 
-```py
-Dragon.element = "fire"
+```csharp
+Dragon.Element = "fire";
 ```
 
-should *not* affect our existing `Dragon` instances! The `Dragon` class should be safe to use in other parts of the codebase, even if silly developers are out there changing class-level variables.
+should *not* affect our existing `Dragon` instances! The `Dragon` class should be safe to use in other parts of the codebase, even if silly developers are out there changing class-level variables.
 
-**Fix the `Dragon` class**.
+**Fix the `Dragon` class**.
 
-1. [ ] Remove the `element` *class* variable.
-2. [ ] Use an *instance* variable for `element`, and allow it to be set in the constructor.
+1. [ ] Remove the `static` `Element` *class* variable.
+2. [ ] Use an *instance* property for `Element`, and allow it to be set in the constructor.
+
+Once `Element` is an instance property, `Dragon.Element = "fire"` doesn't even compile anymore. Run it with `dotnet run -- class-variables`.
