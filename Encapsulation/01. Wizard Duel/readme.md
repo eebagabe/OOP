@@ -4,13 +4,13 @@ Let's have ourselves a Wizard's duel.
 
 ## Assignment
 
-Complete the following methods on the `Wizard` class:
+Complete the following methods on the `Wizard` class:
 
-1. [ ] `get_fireballed()` should:
-   - Reduce the `fireball_damage` by the wizard's `__stamina`
-   - Reduce the wizard's `health` by the resulting `fireball_damage`
-2. [ ] `drink_mana_potion()` should:
-   - Increase the `potion_mana` by the wizard's `__intelligence`
-   - Increase the wizard's mana by the resulting `potion_mana`
+1. [ ] `GetFireballed()` should:
+   - Reduce the `fireballDamage` by the wizard's `_stamina`
+   - Reduce the wizard's `Health` by the resulting `fireballDamage`
+2. [ ] `DrinkManaPotion()` should:
+   - Increase the `potionMana` by the wizard's `_intelligence`
+   - Increase the wizard's mana by the resulting `potionMana`
 
-Both methods operate directly on the instance of the class (`self`). They take one input and return no values explicitly.
+Both methods operate directly on the instance of the class (`this`). They take one input and return no values (`void`).
