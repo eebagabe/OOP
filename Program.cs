@@ -2,6 +2,7 @@ var exercises = new Dictionary<string, Action>
 {
     ["multiple-objects"] = ObjectOriented.Classes.MultipleObjects.Exercise.Run,
     ["class-variables"] = ObjectOriented.Classes.ClassVariablesVsInstanceVariables.Exercise.Run,
+    ["dragons-fight"] = ObjectOriented.Inheritance.DragonsFight.Exercise.Run,
 };
 
 if (args.Length == 0 || !exercises.TryGetValue(args[0], out var run))
